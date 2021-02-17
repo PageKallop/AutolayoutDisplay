@@ -19,25 +19,23 @@ class ViewController: UIViewController {
     let descriptionTextView: UITextView = {
         
         let textView = UITextView()
-        textView.text = "Join us today in our fun and games!"
-        textView.font = UIFont.boldSystemFont(ofSize: 18)
+        let attributedText = NSMutableAttributedString(string: "Join us today in our fun and games!", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)])
+        attributedText.append(NSAttributedString(string: "\n\n\nAre you ready for loads of fun? Don't wait any longer! We hope to see you in our stores soon!", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13), NSAttributedString.Key.foregroundColor: UIColor.gray]))
+        textView.attributedText = attributedText
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.textAlignment = .center
         textView.isEditable = false
         textView.isScrollEnabled = false
         return textView
     }()
-    
-    let subTextView: UITextView = {
+    // creates previous navigation button
+    private let previousButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Prev", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
 
-        let textView = UITextView()
-        textView.text = "Drop your dog for some doggy day fun"
-        textView.textAlignment = .center
-        textView.isEditable = false
-        textView.isScrollEnabled = false
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        return textView
-    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,10 +43,21 @@ class ViewController: UIViewController {
        
      
         view.addSubview(descriptionTextView)
-        view.addSubview(subTextView)
         setUpLayout()
       
+        setUpBottomControls()
         
+    }
+    
+    private func setUpBottomControls() {
+        //adds prev. button to view
+        view.addSubview(previousButton)
+        previousButton.backgroundColor = .purple
+        // adds constraints
+        previousButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        previousButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        previousButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        previousButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
     private func setUpLayout() {
@@ -73,15 +82,10 @@ class ViewController: UIViewController {
        
         //text description constraints
         descriptionTextView.topAnchor.constraint(equalTo: topImageContainerView.bottomAnchor).isActive = true
-        descriptionTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        descriptionTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        descriptionTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
+        descriptionTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
         descriptionTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-        
-       // subTextView constraints
-        subTextView.topAnchor.constraint(equalTo: topImageContainerView.bottomAnchor, constant: 100).isActive = true
-        subTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        subTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        subTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+      
         
     }
 
