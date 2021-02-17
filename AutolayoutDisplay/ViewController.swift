@@ -72,13 +72,13 @@ class ViewController: UIViewController {
         
        
         //text description constraints
-        descriptionTextView.topAnchor.constraint(equalTo: pawImage.bottomAnchor, constant: 120).isActive = true
+        descriptionTextView.topAnchor.constraint(equalTo: topImageContainerView.bottomAnchor).isActive = true
         descriptionTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         descriptionTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         descriptionTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
         
        // subTextView constraints
-        subTextView.topAnchor.constraint(equalTo: view.topAnchor, constant: 500).isActive = true
+        subTextView.topAnchor.constraint(equalTo: topImageContainerView.bottomAnchor, constant: 100).isActive = true
         subTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         subTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         subTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
