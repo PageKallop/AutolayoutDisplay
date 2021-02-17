@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     let pawImage: UIImageView = {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "dogprint"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
@@ -19,7 +20,22 @@ class ViewController: UIViewController {
         
         let textView = UITextView()
         textView.text = "Join us today in our fun and games!"
-        textView.translatesAutoresizingMaskIntoConstraints = false 
+        textView.font = UIFont.boldSystemFont(ofSize: 18)
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.textAlignment = .center
+        textView.isEditable = false
+        textView.isScrollEnabled = false
+        return textView
+    }()
+    
+    let subTextView: UITextView = {
+
+        let textView = UITextView()
+        textView.text = "Drop your dog for some doggy day fun"
+        textView.textAlignment = .center
+        textView.isEditable = false
+        textView.isScrollEnabled = false
+        textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
 
@@ -27,25 +43,45 @@ class ViewController: UIViewController {
         super.viewDidLoad()
    
        
-        view.addSubview(pawImage)
+     
         view.addSubview(descriptionTextView)
+        view.addSubview(subTextView)
         setUpLayout()
       
         
     }
     
     private func setUpLayout() {
+        
+        let topImageContainerView = UIView()
+        topImageContainerView.backgroundColor = .clear
+        view.addSubview(topImageContainerView)
+        topImageContainerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        topImageContainerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        topImageContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        topImageContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        topImageContainerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
+        //add image to topImageContainer
+        topImageContainerView.addSubview(pawImage)
         //image constraints
-        pawImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        pawImage.topAnchor.constraint(equalTo:view.topAnchor, constant: 100).isActive = true
-        pawImage.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        pawImage.centerXAnchor.constraint(equalTo: topImageContainerView.centerXAnchor).isActive = true
+        pawImage.centerYAnchor.constraint(equalTo: topImageContainerView.centerYAnchor).isActive = true
         pawImage.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        
        
         //text description constraints
-        descriptionTextView.topAnchor.constraint(equalTo: pawImage.bottomAnchor, constant: 150).isActive = true
-        descriptionTextView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        descriptionTextView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        descriptionTextView.topAnchor.constraint(equalTo: pawImage.bottomAnchor, constant: 120).isActive = true
+        descriptionTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        descriptionTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         descriptionTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        
+       // subTextView constraints
+        subTextView.topAnchor.constraint(equalTo: view.topAnchor, constant: 500).isActive = true
+        subTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        subTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        subTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
     }
 
