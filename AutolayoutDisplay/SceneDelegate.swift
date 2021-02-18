@@ -17,6 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let winScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: winScene)
         let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
         let newViewController = SwipeController(collectionViewLayout: layout)
         window?.rootViewController = newViewController
         window?.makeKeyAndVisible()

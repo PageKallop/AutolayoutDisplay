@@ -9,14 +9,19 @@ import Foundation
 import  UIKit
 
 
-class SwipeController: UICollectionViewController {
+class SwipeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
         
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellId")
+        collectionView?.register(PageCell.self, forCellWithReuseIdentifier: "cellId")
         
         collectionView?.backgroundColor = .purple
+        collectionView.isPagingEnabled = true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -25,7 +30,11 @@ class SwipeController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
-        cell.backgroundColor = .purple
+//        cell.backgroundColor = indexPath.item % 2 == 0 ? .gray : .purple
         return cell 
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: view.frame.height)
     }
 }
