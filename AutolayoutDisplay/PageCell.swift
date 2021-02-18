@@ -29,11 +29,53 @@ class PageCell: UICollectionViewCell {
         textView.isScrollEnabled = false
         return textView
     }()
+    // creates previous navigation button
+    private let previousButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Prev", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(.gray, for: .normal)
+        return button
+    }()
+    
+    private let nextButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Next", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(.gray, for: .normal)
+        return button
+    }()
+    
+    private let pageControl: UIPageControl = {
+        let pc = UIPageControl()
+        pc.currentPage = 0
+        pc.numberOfPages = 4
+        pc.currentPageIndicatorTintColor = .black
+        pc.pageIndicatorTintColor = .gray
+        return pc
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
         setUpLayout()
+        setUpBottomControls()
+    }
+    private func setUpBottomControls() {
+        //adds buttons to view
+    
+        let bottomControlsStackView = UIStackView(arrangedSubviews: [previousButton, pageControl, nextButton])
+        bottomControlsStackView.translatesAutoresizingMaskIntoConstraints = false
+        bottomControlsStackView.distribution = .fillEqually
+       addSubview(bottomControlsStackView)
+        
+        // adds constraints
+        bottomControlsStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
+        bottomControlsStackView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
+        bottomControlsStackView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
+        bottomControlsStackView.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
   
     private func setUpLayout() {
