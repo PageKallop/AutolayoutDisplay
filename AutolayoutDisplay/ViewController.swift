@@ -33,7 +33,27 @@ class ViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("Prev", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(.gray, for: .normal)
         return button
+    }()
+    
+    private let nextButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Next", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(.gray, for: .normal)
+        return button
+    }()
+    
+    private let pageControl: UIPageControl = {
+        let pc = UIPageControl()
+        pc.currentPage = 0
+        pc.numberOfPages = 4
+        pc.currentPageIndicatorTintColor = .black
+        pc.pageIndicatorTintColor = .gray
+        return pc
     }()
 
 
@@ -50,18 +70,22 @@ class ViewController: UIViewController {
     }
     
     private func setUpBottomControls() {
-        //adds prev. button to view
-        view.addSubview(previousButton)
-        previousButton.backgroundColor = .purple
+        //adds buttons to view
+    
+        let bottomControlsStackView = UIStackView(arrangedSubviews: [previousButton, pageControl, nextButton])
+        bottomControlsStackView.translatesAutoresizingMaskIntoConstraints = false
+        bottomControlsStackView.distribution = .fillEqually
+        view.addSubview(bottomControlsStackView)
+        
         // adds constraints
-        previousButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        previousButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        previousButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        previousButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        bottomControlsStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        bottomControlsStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        bottomControlsStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        bottomControlsStackView.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
     private func setUpLayout() {
-        
+        //creates container view to hold image view
         let topImageContainerView = UIView()
         topImageContainerView.backgroundColor = .clear
         view.addSubview(topImageContainerView)
